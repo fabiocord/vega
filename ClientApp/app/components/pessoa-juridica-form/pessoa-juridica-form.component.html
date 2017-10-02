@@ -1,0 +1,33 @@
+<h1>Pessoa Jurídica</h1>
+
+<form  #f="ngForm" [formGroup]="pessoaJuridicaForm" (ngSubmit)="submit()" novalidate>
+  <div class="form-group">
+    <label for="nomeFantasia">Nome Fantasia</label>
+    <input id="nomeFantasia" type="text" formControlName="nomeFantasia" class="form-control" [(ngModel)]="pessoaJuridica.nomeFantasia" name="nomeFantasia" maxlength="50" required>
+    
+    <control-messages [control]="pessoaJuridicaForm.controls.nomeFantasia"></control-messages> 
+  </div>
+  <div class="form-group">
+    <label for="razaoSocial">Razão Social</label>
+    <input id="razaoSocial" type="text" formControlName="razaoSocial" class="form-control" [(ngModel)]="pessoaJuridica.razaoSocial" name="razaoSocial" maxlength="50" required>
+    
+    <control-messages [control]="pessoaJuridicaForm.controls.razaoSocial"></control-messages> 
+  </div>
+  <div class="form-group">
+    <label for="cnpjGroup">CNPJ</label>
+    <div id="cnpjGroup">
+      <p-inputMask id="cnpj" formControlName="cnpj" [(ngModel)]="pessoaJuridica.cnpj" mask="99.999.999/9999-99" name="cnpj" unmask="true" required></p-inputMask>
+      <control-messages [control]="pessoaJuridicaForm.controls.cnpj"></control-messages> 
+    </div>    
+  </div>
+  <app-endereco-form
+  [estado] = "pessoaJuridica.endereco.estado"
+  [cidade] = "pessoaJuridica.endereco.cidade"
+  [logradouro] = "pessoaJuridica.endereco.logradouro"
+  (onEstadoChangeOutput) = "onEnderecoEstadoChange($event)"
+  (onCidadeChangeOutput) = "onEnderecoCidadeChange($event)"
+  (onLogradouroChangeOutput) = "onEnderecoLogradouroChange($event)"
+  >
+  </app-endereco-form>
+  <button class="btn btn-primary" [disabled]="!pessoaJuridicaForm.valid || !enderecoValido">Salvar</button>
+</form>

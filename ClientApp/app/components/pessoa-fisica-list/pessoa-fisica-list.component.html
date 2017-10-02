@@ -1,0 +1,48 @@
+<h2>Pessoas Físicas</h2>
+<p>
+  <a [routerLink]="['/pessoasFisicas/new']" class="btn btn-primary">Nova Pessoa Física</a>
+</p>
+<div class="well">
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <select id="nome" class="form-control" [(ngModel)]="query.nome" (change)="onFilterChange()">
+      <option value=""></option>
+      <option *ngFor="let q of queryFilter.items" value="{{ q.nome }}">{{q.nome }}</option>
+    </select>
+  </div>
+  <button class="btn btn-default" (click)="resetFilter()">Reset</button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let c of columns">
+        <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+          {{ c.title }}
+          <i *ngIf="query.sortBy === c.key" 
+            class="fa"
+            [class.fa-sort-asc]="query.isSortAscending"
+            [class.fa-sort-desc]="!query.isSortAscending"
+          ></i>
+        </div>
+        <div *ngIf="!c.isSortable">
+          {{ c.title }}
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let v of queryResult.items">
+      <td>{{ v.id }}</td>
+      <td>{{ v.nome }}</td>
+      <td>{{ v.sobreNome }}</td>
+      <td>{{ v.cpf }}</td>
+      <td>{{ v.endereco.estado }}</td>
+      <td>{{ v.endereco.cidade }}</td>
+      <td>{{ v.endereco.logradouro }}</td>
+      <td>
+        <a [routerLink]="['/pessoasFisicas/', v.id,v.cpf]">Editar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>

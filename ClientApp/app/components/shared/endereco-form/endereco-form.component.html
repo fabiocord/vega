@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label for="enderecoEstado">Estado</label>
+  <select id="enderecoEstado" class="form-control"  (change)="onEstadoChange()" [(ngModel)]="estado" name="enderecoEstado" required #enderecoEstado="ngModel">
+    <option value=""></option>
+    <option *ngFor="let e of estados" value="{{ e.uf }}">{{ e.estado}}</option>
+  </select>
+  <!-- <input id="enderecoEstado" type="text" class="form-control" [(ngModel)]="pessoaJuridica.endereco.estado" name="enderecoEstado" required #enderecoEstado="ngModel"> -->
+  <div class="alert alert-danger" *ngIf="enderecoEstado.touched && !enderecoEstado.valid">Por favor informe o Estado.</div>
+</div>
+<div class="form-group">
+  <label for="enderecoCidade">Cidade</label>
+  <input id="enderecoCidade" type="text" class="form-control" [(ngModel)]="cidade" name="enderecoCidade" (input)="onCidadeChange()" required #enderecoCidade="ngModel">
+  <div class="alert alert-danger" *ngIf="enderecoCidade.touched && !enderecoCidade.valid">Por favor informe a cidade.</div>
+</div>
+<div class="form-group">
+  <label for="enderecoLogradouro">Logradouro</label>
+  <input id="enderecoLogradouro" type="text" class="form-control" [(ngModel)]="logradouro" name="enderecoLogradouro" (input)="onLogradouroChange()"  maxlength="200" required #enderecoLogradouro="ngModel">
+  <div class="alert alert-danger" *ngIf="enderecoLogradouro.touched && !enderecoLogradouro.valid">Por favor informe o Logradouro.</div>
+</div>
