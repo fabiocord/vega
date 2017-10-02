@@ -1,2 +1,2 @@
 # vega
-Projeto de Demonstração de integração Asp .Net Core + Angular 2
+Projeto de Demonstração de integração Asp .Net Core + Angular 2 f
